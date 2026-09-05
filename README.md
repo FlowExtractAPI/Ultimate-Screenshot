@@ -101,6 +101,24 @@ Export cookies with a browser extension such as [Cookie Editor](https://cookie-e
 }
 ```
 
+**Finding the right selector.** Right-click the thing you want gone → *Inspect* → find the outermost box that wraps the whole banner → use its `id` as `#the-id`, or a class as `.the-class`. Hide the wrapper, not the text inside it, or you will be left with an empty bar.
+
+Most consent banners come from a handful of platforms, so these cover a lot of the web:
+
+| Platform | Selector |
+|---|---|
+| OneTrust (used by apify.com and many large sites) | `#onetrust-consent-sdk` |
+| Cookiebot | `#CybotCookiebotDialog` |
+| Osano | `.osano-cm-window` |
+| Quantcast / TCF | `.qc-cmp2-container` |
+| Usercentrics | `#usercentrics-root` |
+| CookieYes | `.cky-consent-container` |
+| Generic catch-all | `[id*="cookie"]`, `[class*="cookie-banner"]` |
+
+Hiding is applied as a style rule as soon as the page opens, so a banner that appears **after** the page has loaded is caught too — many consent scripts take several seconds to inject theirs.
+
+If a selector matches nothing, the result row's `notes` says so rather than leaving you guessing.
+
 ---
 
 ## 🎛️ All settings
@@ -122,7 +140,7 @@ Export cookies with a browser extension such as [Cookie Editor](https://cookie-e
 | `scrollToBottom` | `false` | Scroll through the page before capturing so lazy content loads. |
 | `maxScrollSeconds` | `15` s | The longest scrolling may take. Scrolling also stops as soon as the page stops growing. |
 | `delayAfterScrolling` | `500` ms | Pause after scrolling, so content loaded on the way down can render. |
-| `hideSelectors` | — | CSS selectors to hide before capturing. Selectors that match nothing are ignored. |
+| `hideSelectors` | — | CSS selectors to hide — cookie banners, chat bubbles, sticky headers. Applied as a style rule the moment the page opens, so it also catches banners that appear seconds later. Selectors matching nothing are reported in `notes`. |
 
 ### Video & GIF
 
