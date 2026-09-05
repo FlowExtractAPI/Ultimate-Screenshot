@@ -152,7 +152,17 @@ Export cookies with a browser extension such as [Cookie Editor](https://cookie-e
 
 ## 📊 What you get back
 
-One row per address, plus the file itself in the run's key-value store.
+One row per address, plus the file itself in the run's storage.
+
+**Files are grouped by what they are.** Open the run's Storage tab and you get three named collections rather than one flat list:
+
+| Collection | Holds | Key prefix |
+|---|---|---|
+| **Screenshots** | PNG and JPEG images | `screenshot-` |
+| **Videos & GIFs** | MP4 and GIF recordings | `video-` |
+| **PDF documents** | PDF renderings | `document-` |
+
+A GIF is filed with video, not with the images — it is a *recording* of the page, made by the same frame capture and described by the same length and frame-rate settings as an MP4. Its file type happens to be `image/gif`, which is why the video collection accepts that type too.
 
 ```json
 {
