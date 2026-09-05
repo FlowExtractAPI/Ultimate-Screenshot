@@ -101,7 +101,26 @@ Export cookies with a browser extension such as [Cookie Editor](https://cookie-e
 }
 ```
 
-**Finding the right selector.** Right-click the thing you want gone → *Inspect* → find the outermost box that wraps the whole banner → use its `id` as `#the-id`, or a class as `.the-class`. Hide the wrapper, not the text inside it, or you will be left with an empty bar.
+### Finding the right selector
+
+![Right-click the banner, choose Inspect, then read the id or class off the highlighted element](https://raw.githubusercontent.com/FlowExtractAPI/Ultimate-Screenshot/refs/heads/main/find-the-selector-chrome.png)
+
+1. **Right-click the banner** you want gone and choose **Inspect** (bottom of the menu).
+2. The developer tools open with that element highlighted. Click **upwards** through the boxes until the highlight covers the **whole banner**, not just its text — you can see the size readout, `340 × 122`, confirming the right box is selected.
+3. Read the `id` or `class` off that line and type it with the right prefix:
+
+   | In the HTML | You type | Because |
+   |---|---|---|
+   | `<div id="onetrust-consent-sdk">` | `#onetrust-consent-sdk` | an **id** takes a **`#`** |
+   | `<div class="cookie-bar">` | `.cookie-bar` | a **class** takes a **`.`** |
+
+   Prefer the id when the element has one — it is shorter and changes less often.
+
+> The screenshot is Chrome, but this works the same in **Edge, Firefox and Safari**: you are reading an attribute out of the page's own HTML, not using a browser feature.
+>
+> Chrome and Edge also offer **Copy → Copy selector** (Firefox: *Copy → CSS Selector*), visible on the right of the screenshot. It works, but it usually produces a long path like `#onetrust-consent-sdk > div:nth-child(2) > div` that breaks the next time the site changes its layout — the plain id above keeps working.
+
+Hide the wrapper, not the text inside it, or you will be left with an empty bar.
 
 Most consent banners come from a handful of platforms, so these cover a lot of the web:
 
