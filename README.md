@@ -272,22 +272,25 @@ The numbers below match .actor/pay_per_event.json exactly — change both togeth
 
 | Event | FREE | BRONZE | SILVER | GOLD |
 |---|---|---|---|---|
-| **Run start** (once per run) | $0.002 | $0.0015 | $0.001 | $0.001 |
-| **Browser time** (per GB of memory, per 30 s) | $0.005 | $0.0042 | $0.0042 | $0.0042 |
-| **Page capture** (per saved file) | $0.007 | $0.005 | $0.004 | $0.0035 |
+| **Page capture** (per saved file) | $0.007 | $0.006 | $0.0055 | $0.005 |
+| **Video frame** (per frame of an MP4 or GIF) | $0.00035 | $0.0003 | $0.00028 | $0.00025 |
+
+No start fee, and no charge for browser time — a screenshot costs the same
+whether the page is quick or slow.
 
 **What a run actually costs** — measured on this actor at 2 GB:
 
-| Run | Browser time | Total on BRONZE |
+| Run | Frames | Total on BRONZE |
 |---|---|---|
-| One JPEG of a normal page | ~1 unit | ~$0.011 |
-| Ten JPEGs in a single run | ~2 units | ~$0.060 (≈ $0.006 per page) |
-| One PDF | ~1 unit | ~$0.011 |
-| A 5-second GIF at 10 fps | ~3 units | ~$0.019 |
-| A 10-second MP4 at 15 fps | ~8 units | ~$0.040 |
+| One screenshot or PDF | — | **$0.006** |
+| Ten screenshots in one run | — | **$0.060** |
+| A 5-second GIF at 10 fps | 50 | ~$0.021 |
+| A 10-second MP4 at 15 fps | 150 | ~$0.051 |
+| A 10-second MP4 at 30 fps | 300 | ~$0.096 |
 
-Pages that produce no file are never charged — they still appear in your results
-with a sentence explaining what happened.
+Still images and PDFs never pay the frame charge. Pages that produce no file are
+never charged at all — they still appear in your results with a sentence saying
+what happened.
 
 ▲▲▲ END OF THE PARKED PAY-PER-EVENT SECTION ▲▲▲
 ══════════════════════════════════════════════════════════════════════════ -->
