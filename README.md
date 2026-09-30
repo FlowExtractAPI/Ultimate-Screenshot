@@ -273,12 +273,13 @@ The numbers below match .actor/pay_per_event.json exactly — change both togeth
 | Event | FREE | BRONZE | SILVER | GOLD |
 |---|---|---|---|---|
 | **Page capture** (per saved file) | $0.007 | $0.006 | $0.0055 | $0.005 |
+| **Extra attempt** (only when a site refuses us) | $0.005 | $0.0045 | $0.004 | $0.0035 |
 | **Video frame** (per frame of an MP4 or GIF) | $0.00035 | $0.0003 | $0.00028 | $0.00025 |
 
 No start fee, and no charge for browser time — a screenshot costs the same
 whether the page is quick or slow.
 
-**What a run actually costs** — measured on this actor at 2 GB:
+**What a run actually costs** — measured on this actor:
 
 | Run | Frames | Total on BRONZE |
 |---|---|---|
@@ -288,9 +289,24 @@ whether the page is quick or slow.
 | A 10-second MP4 at 15 fps | 150 | ~$0.051 |
 | A 10-second MP4 at 30 fps | 300 | ~$0.096 |
 
-Still images and PDFs never pay the frame charge. Pages that produce no file are
-never charged at all — they still appear in your results with a sentence saying
-what happened.
+Still images and PDFs never pay the frame charge.
+
+#### When a site refuses us
+
+A few sites — Facebook's Ad Library is the well-known one — serve an empty page
+to a datacentre address. Waiting longer never fixes that, so the capture is
+retried from a different address, up to three extra times. Each extra attempt is
+charged, because each one is a real page load.
+
+Almost every page needs none of them, so almost every capture costs the page
+capture fee and nothing more. On the sites that do fight back, expect one or two
+extra attempts: a BRONZE capture of a page like the Ad Library usually lands
+between $0.011 and $0.015 rather than $0.006.
+
+Extra attempts are charged whether or not one of them gets through, because the
+work happens either way. The page capture fee is the opposite — if every address
+is refused you are not charged for it, so a run that ends with a blank image pays
+only for the attempts. Either way the result row says exactly what happened.
 
 ▲▲▲ END OF THE PARKED PAY-PER-EVENT SECTION ▲▲▲
 ══════════════════════════════════════════════════════════════════════════ -->
@@ -323,8 +339,9 @@ Progress is saved after every page. If the run is migrated, restarted or aborted
 | Situation | What you see | What to do |
 |---|---|---|
 | An address is not a web address | The run is refused when you submit it, naming the position of the bad line | Fix or remove that line |
-| A page will not load | `status: "failed"` and an `error` sentence for that address only | Raise `timeouT`, or check the address in a browser |
+| A page will not load | `status: "failed"` and an `error` sentence for that address only | Raise `timeout`, or check the address in a browser |
 | The site answers with an error code | A capture of the error page, and a note giving the status code | Expected — the page really did answer that way |
+| The site serves an empty page to a datacentre address | The capture is automatically retried from up to three other addresses; a note says how many were refused | Nothing, if one got through. If all of them were refused, supply your own proxy or pick a proxy country closer to the site's audience |
 | A page is taller than 16 000 px | A clipped image, and a note with the page's real height | Capture the window instead of the whole page, or a narrower window |
 | A recording came out short | Fewer `frames` than asked, and a note saying why | Lower `fps` or `recordSeconds`, or record a lighter page |
 | Nothing was captured at all | A single row with `status: "no_input"` | Check the addresses in the input |
